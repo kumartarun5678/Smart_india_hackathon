@@ -1,0 +1,1 @@
+export const BASE_URL= "https://vechile-back.onrender.com"

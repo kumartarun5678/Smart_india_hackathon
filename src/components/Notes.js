@@ -22,8 +22,7 @@ const Notes = (props) => {
     etag: "",
   });
 
-  const [filteredList, setFilteredList] = useState([]);
-  const [searchResult, setSearchResult] = useState(null);
+
 
   useEffect(() => {
     if (localStorage.getItem("token")) {

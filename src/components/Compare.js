@@ -1,33 +1,26 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import noteContext from "../context/notes/noteContext.js";
 import Noteitem from "./Noteitem.js";
 import { useNavigate } from "react-router-dom";
-import axios from "axios"; // Import Axios for making API requests
+import axios from "axios";
 
 const Compare = () => {
   const context = useContext(noteContext);
   const { notes } = context;
+  console.log(notes);
 
   const [start, setStart] = useState("");
   const [end, setEnd] = useState("");
   const [searchResult, setSearchResult] = useState([]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   if (!localStorage.getItem("token")) {
-  //     navigate("/home");
-  //   }
-  // }, [navigate]);
-
+console.log(navigate)
   const handleCompare = async () => {
     setLoading(true);
     try {
-      // Send a GET request to your backend API to fetch matching notes
       const response = await axios.get(
         `http://localhost:8000/api/notes/compare?start=${start}&end=${end}`
       );
-      console.log(response)
 
       if (response.data.length === 0) {
         setSearchResult([]);
@@ -43,7 +36,7 @@ const Compare = () => {
 
   return (
     <div className="con">
-      <h2>Compare Buses</h2>
+      <h2>Get Bus Details</h2>
       <div className="mb-3">
         <label htmlFor="start" className="form-label">
           Starting Position
@@ -53,7 +46,7 @@ const Compare = () => {
           className="form-control"
           id="start"
           name="start"
-          placeholder="Enter Starting positon"
+          placeholder="Enter Starting position"
           value={start}
           onChange={(e) => setStart(e.target.value)}
           required
@@ -68,7 +61,7 @@ const Compare = () => {
           className="form-control"
           id="end"
           name="end"
-          placeholder="Enter Destination positon"
+          placeholder="Enter Destination position"
           value={end}
           onChange={(e) => setEnd(e.target.value)}
           required
@@ -80,11 +73,11 @@ const Compare = () => {
         onClick={handleCompare}
         disabled={loading || start.trim() === "" || end.trim() === ""}
       >
-        Compare Buses
+        Get Bus
       </button>
       {loading && <p>Loading...</p>}
       {searchResult.length === 0 && !loading && (
-        <p></p> // Corrected the message here
+        <p>No bus details found for the given criteria.</p>
       )}
       {searchResult.length > 0 && (
         <div className="row my-3">

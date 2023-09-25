@@ -1,7 +1,8 @@
 const connectToMongo = require('./db');
 const express = require('express')
 var cors = require('cors') 
-
+const BASE_URL = process.env.BASE_URL;
+const port = process.env.PORT || 8000
 connectToMongo();
 const app = express()
 
@@ -15,7 +16,7 @@ app.use('/api/notes', require('./routes/notes'))
 
 
 
-const port = 8000
+
 app.listen(port, () => {
-  console.log(`Server is running on port http://localhost:${port}`);
+  console.log(`Server is running on port ${BASE_URL}`);
 });

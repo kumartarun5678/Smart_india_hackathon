@@ -17,7 +17,7 @@ const MapComponent = () => {
       return;
     }
 
-    const map = L.map(mapContainer).setView([25.5941, 85.1376], 11);
+    const map = L.map(mapContainer).setView([22.5958, 88.2636], 11);
 
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
       attribution: 'Leaflet &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
@@ -31,7 +31,7 @@ const MapComponent = () => {
 
     let marker;
 
-    marker = L.marker([25.5941, 85.1376], { icon: busIcon }).addTo(map);
+    marker = L.marker([22.5958, 88.2636], { icon: busIcon }).addTo(map);
 
     // Create a Geocoder control
     const geocoderControl = L.Control.geocoder({
@@ -42,6 +42,7 @@ const MapComponent = () => {
       }),
     }).addTo(map);
 
+    console.log(geocoderControl);
     // Create a Locate control
     L.control.locate().addTo(map);
 
